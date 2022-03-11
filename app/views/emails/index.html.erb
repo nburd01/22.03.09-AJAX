@@ -1,0 +1,40 @@
+<h1>Emails#index</h1>
+<p>Find me in app/views/emails/index.html.erb</p>
+
+<!---list --->
+<ul id="email-list">
+<% @emails.each do |email| %>
+    <div class="container">
+        <div class="row">
+             <div class="col-2">
+                 <%=email.objet %>
+            </div>
+            <div class="col-9">
+                 <b><%= email.body  %></b>
+            </div>
+            <div class="col-1">
+                <%= link_to 'destroy', email, method: :delete %>
+            </div>
+        </div>
+    </div>
+    <% end %>
+ 
+</ul>
+
+
+<!--- form --->
+<div class="form">
+  <%= form_tag(emails_path, method: :post, class: "form", remote: true) do %>
+    <label for="objet">Objet
+    <%= text_field_tag  :objet %>
+
+    <label for="body">Body
+    <%= text_field_tag  :body %>
+    <!--- create --->
+    <%= submit_tag 'create', :name => 'commit'%>
+    <!--- edit --->
+    <%= submit_tag 'edit', :name => 'commit'%>
+    <!--- destroy --->
+    <%= submit_tag 'destroy', :id => 'destroy'%>
+  <% end %>
+</div>
